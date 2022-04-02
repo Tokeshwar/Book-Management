@@ -2,6 +2,10 @@ const jwt = require("jsonwebtoken");
 const bookModel = require("../model/bookModel");
 
 
+//................................authentication.....................................................
+
+
+
 const authentication = async (req, res, next) => {
     try {
         let token = req.headers["x-api-key"];
@@ -16,6 +20,11 @@ const authentication = async (req, res, next) => {
     }
     next()
 }
+
+
+//................................authorisation.....................................................
+
+
 
 const authorisation = async (req, res, next) => {
     try {
@@ -34,9 +43,9 @@ const authorisation = async (req, res, next) => {
 }
 
 
-module.exports.authentication = authentication
-module.exports.authorisation = authorisation
+
+module.exports = {authentication, authorisation}
 
 
 
-//
+

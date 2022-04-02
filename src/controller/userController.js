@@ -12,6 +12,10 @@ const isValidTitle = (title) => {
 
 }
 
+
+// ...........................for user registeration...............................................
+
+
 const register = async (req, res) => {
 
     try {
@@ -57,7 +61,7 @@ const register = async (req, res) => {
 
         const Mobile = phone
         const validateMobile = function (Mobile) {
-            return /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/.test(Mobile)
+            return /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/.test(Mobile)
         }
         if (!validateMobile(Mobile)) {
             return res.status(400).send({ status: false, message: "Please enter valid mobile" })
@@ -89,6 +93,11 @@ const register = async (req, res) => {
         res.status(500).send({ status: false, message: error.message })
     }
 }
+
+
+// ...........................for user login...............................................
+
+
 
 const login = async (req, res) => {
 
@@ -122,7 +131,7 @@ const login = async (req, res) => {
 
         const token = jwt.sign({
             id: user._id,
-            group: "06",
+            group: "16",
             iat: Math.floor(Date.now() / 1000),
             exp: Math.floor(Date.now() / 1000) + 1 * 60 * 60
 

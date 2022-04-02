@@ -4,22 +4,25 @@ const userModel = require("../model/userModel")
 const reviewModel = require("../model/reviewModel")
 const moment = require("moment")
 
+
 const isValid = function (value) {
     if (typeof value === 'undefined' || value === null) return false
     if (typeof value === 'string' && value.trim().length === 0) return false
     return true;
 }
 
+
 const isValidObjectId = function (ObjectId) {
     return mongoose.Types.ObjectId.isValid(ObjectId)
 }
+
 
 const isValidRequestBody = function (requestBody) {
     return Object.keys(requestBody).length > 0
 }
 
 
-        //...............................create book............................................
+//...............................create book............................................
 
 
 let createBook = async (req, res) => {
@@ -108,7 +111,7 @@ let createBook = async (req, res) => {
 }
 
 
-      //........................................get books..........................................
+//........................................get books..........................................
 
 
 const getBook = async (req, res) => {
@@ -140,7 +143,7 @@ const getBook = async (req, res) => {
 }
 
 
-        //...............................get books by Id.............................................
+//...............................get books by Id.............................................
 
 
 const getBooksById = async (req, res) => {
@@ -172,10 +175,10 @@ const getBooksById = async (req, res) => {
         return res.status(500).send({ status: false, message: error.message })
     }
 }
-    
- 
-    //.....................................update book.........................................
-  
+
+
+//.....................................update book.........................................
+
 
 const updateBook = async (req, res) => {
 
@@ -221,7 +224,7 @@ const updateBook = async (req, res) => {
 }
 
 
-        //.....................................update book.............................................
+//.....................................update book.............................................
 
 
 const deleteBook = async (req, res) => {
@@ -249,4 +252,3 @@ const deleteBook = async (req, res) => {
 module.exports = { createBook, getBook, getBooksById, updateBook, deleteBook }
 
 
-//

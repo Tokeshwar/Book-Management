@@ -1,8 +1,9 @@
 const mongoose = require("mongoose")
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const reviewSchema = mongoose.Schema({
     bookId:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:ObjectId,
         ref: "Book",
         required: true
     },
@@ -28,4 +29,3 @@ const reviewSchema = mongoose.Schema({
 
 module.exports = mongoose.model("Review", reviewSchema)
 
-//

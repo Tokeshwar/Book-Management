@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const bookSchema = mongoose.Schema({
     
@@ -12,7 +13,7 @@ const bookSchema = mongoose.Schema({
         required: true
     }, 
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: ObjectId,
         required: true,
         ref: "User"
     },

@@ -1,7 +1,6 @@
 const mongoose = require("mongoose")
 const reviewModel = require("../model/reviewModel")
 const bookModel = require("../model/bookModel")
-const moment = require("moment")
 
 
 const isValidObjectId = function (ObjectId) {
@@ -20,6 +19,7 @@ const createReview = async (req, res) => {
             return res.status(400).send({ status: false, message: "please fill all required feilds" })
         }
         const { bookId } = req.params
+        
         if (!isValidObjectId(bookId)) {
             return res.status(400).send({ status: false, message: "please give valid book id" })
         }

@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const bookModel = require("../model/bookModel")
 const userModel = require("../model/userModel")
 const reviewModel = require("../model/reviewModel")
-const moment = require("moment")
+
 
 
 const isValid = function (value) {
@@ -135,6 +135,7 @@ const getBook = async (req, res) => {
             return 0;
         }
 
+
         books.sort(compare)
         return res.status(200).send({ status: true, message: "Books list", data: books })
     } catch (error) {
@@ -208,10 +209,6 @@ const updateBook = async (req, res) => {
             return res.status(400).send({ status: false, message: "isbn must be unique" })
         }
 
-        if (data.isDeleted == true) {
-            data.deletedAt = moment().format("YYYY-MM-DD")
-        }
-
         const update = await bookModel.findOneAndUpdate({ _id: id, isDeleted: false }, { $set: data }, { new: true })
 
         if (!update) return res.status(400).send({ status: false, message: "Book is Deleted" })
@@ -224,7 +221,7 @@ const updateBook = async (req, res) => {
 }
 
 
-//.....................................update book.............................................
+//.....................................delete book.............................................
 
 
 const deleteBook = async (req, res) => {

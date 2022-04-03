@@ -4,8 +4,10 @@ const userModel = require("../model/userModel")
 
 const isValid = function (value) {
     if (typeof (value) === undefined || typeof (value) === null) { return false }
-    if (typeof (value) === "string" && (value).trim().length > 0) { return true }
+    if (typeof (value) === "string" && (value).trim().length === 0) { return false }
+    return true;
 }
+
 
 const isValidTitle = (title) => {
     return ['Mr', 'Mrs', 'Miss'].indexOf(title) !== -1

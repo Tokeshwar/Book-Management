@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const reviewModel = require("../model/reviewModel")
 const bookModel = require("../model/bookModel")
+const moment = require("moment")
 
 
 const isValidObjectId = function (ObjectId) {
@@ -19,7 +20,7 @@ const createReview = async (req, res) => {
             return res.status(400).send({ status: false, message: "please fill all required feilds" })
         }
         const { bookId } = req.params
-        
+
         if (!isValidObjectId(bookId)) {
             return res.status(400).send({ status: false, message: "please give valid book id" })
         }
@@ -43,7 +44,7 @@ const createReview = async (req, res) => {
 
         data.reviewedAt = moment().format()
         data.bookId = bookId
-        
+
         const review = await reviewModel.create(data)
         await bookModel.findByIdAndUpdate({ _id: bookId }, { $inc: { reviews: 1 } })
         return res.status(201).send({ status: true, message: "success", data: review })
@@ -136,6 +137,9 @@ const deleteReview = async (req, res) => {
         if (bookId != review.bookId) {
             return res.status(400).send({ status: false, message: 'review not found for this book' })
         }
+
+        data.reviewedAt = moment().format()
+
         const delReview = await reviewModel.findByIdAndUpdate(reviewId, { isDeleted: true }, { new: true })
         await bookModel.findByIdAndUpdate({ _id: bookId }, { $inc: { reviews: -1 } })
         return res.status(200).send({ status: true, data: delReview })
